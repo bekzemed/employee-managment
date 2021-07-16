@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const employee = require('./route/employee');
 const cors = require('cors');
 const path = require('path');
+const ENV = require('./config/keys').NODE_ENV;
 
 //
 const app = express();
@@ -30,12 +31,16 @@ mongoose
 app.use('/employees', employee);
 
 // serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
+if (ENV === 'production') {
   // set static folder
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, '/client/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  app.get('*', (req, res) => {
+    res.send('Api running');
   });
 }
 

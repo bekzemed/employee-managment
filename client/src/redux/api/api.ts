@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export enum URL {
-  BASE_URL = 'http://localhost:5000/employees',
+  BASE_URL = '/employees',
 }
 
 export const apiData = async (url: string, data: any, method: string) => {
