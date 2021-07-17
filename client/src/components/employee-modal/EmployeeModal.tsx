@@ -30,7 +30,9 @@ const EmployeeModal: React.FC<props> = ({ handleClose, employee }) => {
   const [birth, setBirth] = useState<string>(
     employee ? employee.birth.substring(0, 10) : ''
   );
-  const [salary, setSalary] = useState<number>(employee ? employee.salary : 0);
+  const [salary, setSalary] = useState<string>(
+    employee ? employee.salary.toString() : ''
+  );
 
   const dispatch = useDispatch();
 
@@ -40,7 +42,7 @@ const EmployeeModal: React.FC<props> = ({ handleClose, employee }) => {
       name,
       gender,
       birth,
-      salary,
+      salary: parseInt(salary),
     };
 
     dispatch(updateEmployeeRequest(employeeData));
@@ -53,7 +55,7 @@ const EmployeeModal: React.FC<props> = ({ handleClose, employee }) => {
       name,
       gender,
       birth,
-      salary,
+      salary: parseInt(salary),
     };
     dispatch(addEmployeeRequest(employeeData));
     handleClose();
@@ -111,7 +113,7 @@ const EmployeeModal: React.FC<props> = ({ handleClose, employee }) => {
           type="text"
           placeholder="5000"
           value={salary}
-          onChange={e => setSalary(parseInt(e.target.value))}
+          onChange={e => setSalary(e.target.value)}
           margin="normal"
           fullWidth
           required
