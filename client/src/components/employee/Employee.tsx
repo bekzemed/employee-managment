@@ -53,7 +53,7 @@ const Employee: React.FC = () => {
       {showModal && (
         <EmployeeModal
           handleClose={handleModalClose}
-          employee={state.employees.find(
+          employee={state.employees?.find(
             employee => employee._id === currentUserId
           )}
         />
@@ -68,7 +68,7 @@ const Employee: React.FC = () => {
             <span className="number">
               {' '}
               {
-                state.employees.filter(employee => employee.gender === 'Male')
+                state.employees?.filter(employee => employee.gender === 'Male')
                   .length
               }
             </span>
@@ -92,8 +92,9 @@ const Employee: React.FC = () => {
             <span className="number">
               {' '}
               {
-                state.employees.filter(employee => employee.gender === 'Female')
-                  .length
+                state.employees?.filter(
+                  employee => employee.gender === 'Female'
+                ).length
               }
             </span>
           </TotalEmployeeContainer>
